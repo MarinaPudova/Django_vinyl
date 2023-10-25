@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All collections</title>
+</head>
+<body>
+     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white">
+         <h1 class="my-0 mr-md-auto font-weight-normal">Vinyl freak</h1>
+         <nav class="my-2 my-md-0 mr-md-3">
+            <a class="p-2 text-dark" href="/">Main page</a>
+            <a class="p-2 text-dark" href="/info">Our contacts</a>
+            <a class="p-2 text-dark" href="/collections">Collections</a>
+         </nav>
+         <hr>
+    </div>
+    <br>
+
+    <h3>Amount of collections: {{collections.count}}</h3>
+    <p>to be later</p>
+    <table width="50%" border="1">
+        <tr bgcolor="teal" style="color: white">
+            <th>Collection name</th>
+            <th>Owner</th>
+        </tr>
+        {% for elem in collections %}
+            <tr>
+                 <td><a href="{%url 'collection' elem.id %}">{{elem.name}}</a></td>
+                <td>{{elem.owner}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>
