@@ -1,23 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Our contacts</title>
-</head>
-<body>
-     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white">
-         <h1 class="my-0 mr-md-auto font-weight-normal">Vinyl freak</h1>
-         <nav class="my-2 my-md-0 mr-md-3">
-            <a class="p-2 text-dark" href="/">Main page</a>
-            <a class="p-2 text-dark" href="/info">Our contacts</a>
-            <a class="p-2 text-dark" href="/collections">Collections</a>
-         </nav>
-         <hr>
-    </div>
-    <br>
+{% extends 'index.html' %}
+
+{% block title %}
+Our contacts
+{% endblock %}
+
+{% block content %}
     <h3>Our contacts:</h3>
     <p> Address: 221b, Baker Street, London</p>
     <p> Phone number: 221-221-221</p>
     <p> Email: info@vinylfreack.com</p>
-</body>
-</html>
+{% endblock %}

@@ -1,40 +1,40 @@
 {% extends 'index.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Post</title>
-</head>
-<body>
-    {%block block_posts%}
-        {% if post %}
-            <form method="get" action="{% url 'post-update' post.id %}">
-                <button>Update this post</button>
-            </form>
-            <form method="post" action="{% url 'post-delete' post.id %}">
-                {% csrf_token %}
-                <button>Delete this post</button>
-            </form>
-                <table width=100% border=1px>
-                    <tr>
-                        <th>Name</th>
-                        <th>Text</th>
-                        <th>Price</th>
-                        <th>Rating</th>
-                    </tr>
+{% block title %}
+More about
+{% endblock %}
 
-                    <tr>
-                        <td>{{ post.name }}</td>
-                        <td>{{ post.text }}</td>
-                        <td>{{ post.price }}</td>
-                        <td>{{ post.rating }}</td>
-                    </tr>
-                </table>
-        {% else %}
-            <h1>NOT FOUND</h1>
-        {% endif %}
-    {%endblock %}
-
-</body>
-</html>
+{% block content %}
+    {% if collection %}
+        <h2> More about collection "{{ collection.name }}"</h2>
+        <div class="btn-group">
+        <form method="get" action="{% url 'collection-update' collection.id %}">
+            <button style="background:LightSeaGreen;border-radius:10px;border:2px">Update this collection</button>
+        </form>
+        <form method="post" action="{% url 'collection-delete' collection.id %}">
+            {% csrf_token %}
+            <button style="background:LightCoral;border-radius:10px;border:2px">Delete this collection</button>
+        </form>
+        </div>
+        <br>
+        <br>
+        <table width=70% border=1px>
+            <tr bgcolor="teal" style="color: white">
+                <th>Name</th>
+                <th>Owner</th>
+                <th>Year of start</th>
+                <th>Number of records</th>
+                <th>Cost of collection</th>
+            </tr>
+            <tr>
+                <td>{{ collection.name }}</td>
+                <td>{{ collection.owner }}</td>
+                <td>{{ collection.start_year }}</td>
+                <td>{{ collection.number_records }}</td>
+                <td>{{ collection.collection_cost }}</td>
+            </tr>
+        </table>
+    {% else %}
+        <h1>NOT FOUND</h1>
+    {% endif %}
+{% endblock %}
