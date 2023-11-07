@@ -26,7 +26,7 @@ class CollectionListView(generic.ListView):
     model = InfoCollection
     template_name = 'info_collection/collection_list.html'
     context_object_name = 'collections'
-    # queryset = InfoCollection.objects.filter(is_deleted=False)
+    queryset = InfoCollection.objects.filter(is_open_viewing=True)
     # ordering = 'price'
 
 
