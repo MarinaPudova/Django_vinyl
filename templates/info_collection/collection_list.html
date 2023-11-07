@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+
+{% block title %}
+All collections
+{% endblock %}
+
+{% block content %}
+    <h2>Amount of collections: {{collections.count}}</h2>
+    <form method="get" action="{% url 'collection-create'%}">
+        <button class="add_button">Create new collection</button>
+    </form>
+    <br>
+    <table>
+        <tr>
+            <th>Collection name</th>
+            <th>Owner</th>
+        </tr>
+        {% for elem in collections %}
+            <tr>
+                <td><a href="{%url 'collection-detail' elem.id %}">{{elem.name}}</a></td>
+                <td>{{elem.owner}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

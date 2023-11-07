@@ -1,0 +1,49 @@
+header{
+	width: 100%;
+	background: teal;
+	height: 75px;
+	font-family: 'Arial';
+    font-style: italic;
+    font-weight: bold;
+    font-size: 75px;
+    border-bottom: 1px solid black;
+    margin-bottom: 50px
+}
+body{
+    background: PowderBlue
+}
+
+h2{
+    font-family: 'Arial';
+    font-weight: bold;
+    font-size: 35px;
+}
+
+table{
+    width: 50%;
+    border: 1px
+}
+
+th{
+    background:teal;
+    color: white
+}
+
+td{
+    background:PowderBlue;
+   	font-family: 'Arial';
+    font-size: 15px;
+    border: 1px solid gray
+}
+
+.btn-group{
+    display: flex;
+    justify-content: start;
+    grid-column-gap: 10px
+}
+
+a{
+    font-family: 'Arial';
+    display: inline-block
+    grid-column-gap: 10px
+}
