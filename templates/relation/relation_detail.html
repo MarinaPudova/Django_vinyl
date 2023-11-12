@@ -1,0 +1,19 @@
+{% block content %}
+    {% if collection.record.all %}
+        <h2> List of records:</h2>
+        <table width=70% border=1px>
+            <tr bgcolor="teal" style="color: white">
+                <th>Name</th>
+                <th>Artist</th>
+                <th>Year</th>
+            </tr>
+            {% for rec in collection.record.all %}
+                <tr>
+                    <td>{{ rec.name }}</td>
+                    <td>{{ rec.artist }}</td>
+                    <td>{{ rec.realise_year }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

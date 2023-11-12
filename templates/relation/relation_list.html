@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+
+{% block title %}
+All relations
+{% endblock %}
+
+{% block content %}
+    <h2>Info about relations:</h2>
+   <form method="get" action="{% url 'relation-create'%}">
+        <button  style="background:Moccasin;border-radius:10px;border:2px">Create new relation</button>
+    </form>
+    <br>
+    <table width="50%" border="1">
+        <tr bgcolor="teal" style="color: white">
+            <th>Collection name</th>
+            <th>Record</th>
+        </tr>
+        {% for elem in relations %}
+            <tr>
+                <td>{{elem.collection}}</td>
+                <td>{{elem.record}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
