@@ -5,13 +5,10 @@ Create relation
 {% endblock %}
 
 {% block content %}
-    <h2>Add new relation</h2>
-<!--   <form method="post" action="{% url 'relation-create' collection.id %}">-->
-<!--        {% csrf_token %}-->
-<!--        {{ form.as_p }}-->
-<!--        {%for elem in records%}-->
-<!--            <option value="{{elem.name}}">{{elem.name}}</option>-->
-<!--        {% endfor %}-->
-<!--        <button type="button" style="background:LightSeaGreen;border-radius:10px;border:2px">Add relation</button>-->
-<!--    </form>-->
+    <h2>Add new relation to-to-to "{{collection_url}}"</h2>
+   <form method="post" action="{% url 'relation-create' collection_url.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" style="background:LightSeaGreen;border-radius:10px;border:2px">Add relation</button>
+    </form>
 {% endblock %}

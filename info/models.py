@@ -13,6 +13,7 @@ class InfoCollection(models.Model):
     start_year = models.PositiveSmallIntegerField()
     number_records = models.PositiveSmallIntegerField()
     # collection_cost = models.FloatField()
+    is_open_viewing = models.BooleanField(default=True)
 
     record = models.ManyToManyField(Record, related_name="records", through="CollectionRecord")
 
