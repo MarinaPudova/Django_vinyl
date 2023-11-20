@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+
+{% block title %}
+Create relation
+{% endblock %}
+
+{% block content %}
+    <h2>Add new relation to-to-to "{{collection_url}}"</h2>
+   <form method="post" action="{% url 'relation-create' collection_url.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" style="background:LightSeaGreen;border-radius:10px;border:2px">Add relation</button>
+    </form>
+{% endblock %}
