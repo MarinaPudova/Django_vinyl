@@ -13,7 +13,6 @@ class Record(models.Model):
     #     InfoCollection, on_delete=models.CASCADE, related_name='collection_id', default=None
     # )
 
-
     def __str__(self):
         return f'{self.artist} {self.name}'
 
