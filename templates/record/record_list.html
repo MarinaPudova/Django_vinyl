@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+
+{% block title %}
+All records
+{% endblock %}
+
+{% block content %}
+    <h2>Amount of records: {{records.count}}</h2>
+    <form method="get" action="{% url 'record-create'%}">
+        <button  style="background:Moccasin;border-radius:10px;border:2px">Add new record</button>
+    </form>
+    <br>
+    <table width="50%" border="1">
+        <tr bgcolor="teal" style="color: white">
+            <th>Artist</th>
+            <th>Record name</th>
+            <th>Realise_year</th>
+        </tr>
+        {% for elem in records %}
+            <tr>
+                <td>{{elem.artist}}</td>
+                <td>{{elem.name}}</td>
+                <td>{{elem.realise_year}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

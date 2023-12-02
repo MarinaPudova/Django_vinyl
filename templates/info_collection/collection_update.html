@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+
+{% block title %}
+Update
+{% endblock %}
+
+{% block content %}
+    <h2>Update collection</h2>
+    <form method="post" action="{% url 'collection-update' form.instance.pk %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" style="background:LightSeaGreen;border-radius:10px;border:2px">Update collection</button>
+    </form>
+{% endblock %}
