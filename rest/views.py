@@ -1,5 +1,6 @@
 from rest_framework import mixins, viewsets, filters
 from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django_filters import rest_framework as django_filters
 
@@ -36,6 +37,7 @@ class RecordViewSet(mixins.CreateModelMixin,
     ordering_fields = ('id', 'name', 'artist', 'realise_year')
     search_fields = ('name', 'artist', 'realise_year')
     pagination_class = RecordPagination
+    permission_classes = (IsAuthenticated, )
     serializer_classes = {
         'list': RecordListSerializer,
         'create': RecordCreateSerializer,

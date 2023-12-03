@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
+from datetime import timedelta
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -34,6 +35,8 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split()
 
 # Application definition
 
+AUTH_USER_MODEL = 'authentication.CustomUser'
+
 CORE_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -47,11 +50,14 @@ LOCAL_APPS = [
     'info',
     'record',
     'rest',
+    'authentication',
 ]
 
 THIRD_PARTY_APPS = [
     'rest_framework',
     'django_filters',
+    'djoser',
+    'rest_framework_simplejwt',
 ]
 
 INSTALLED_APPS = CORE_APPS + LOCAL_APPS + THIRD_PARTY_APPS
@@ -63,10 +69,25 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS':
         'rest_framework.pagination.LimitOffsetPagination',
         'PAGE_SIZE': 3,
-
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
 }
 
-MIDDLEWARE = [
+SIMPLE_JWT = {
+    'AUTH_HEADERS_TYPES': ('JWT',),
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=3)
+}
+
+DJOSER = {
+    'USER': 'authentication.CustomUser',
+    'SERIALIZERS': {
+        'user': 'authentication.serializers.UserSerializer',
+        'user_create': 'authentication.serializers.UserCreateSerializer',
+    }
+}
+
+DJANGO_MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -75,6 +96,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CUSTOM_MIDDLEWARE = [
+    # 'rest.middleware.BeforeRequestMiddleware',
+    'rest.middleware.AfterRequestMiddleware',
+]
+
+MIDDLEWARE = DJANGO_MIDDLEWARE + CUSTOM_MIDDLEWARE
 
 ROOT_URLCONF = 'collection.urls'
 

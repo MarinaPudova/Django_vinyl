@@ -23,7 +23,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('info.urls')),  # главная страница
     path('records/', include('record.urls')),
-    path('api/', include('rest.urls')),  # rest
+    path('api/', include([
+        path('', include('rest.urls')),
+        path('', include('authentication.urls')),
+    ])),
 ]
 
 if settings.DEBUG:
