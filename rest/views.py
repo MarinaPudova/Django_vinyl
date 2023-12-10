@@ -1,6 +1,6 @@
 from rest_framework import mixins, viewsets, filters
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.response import Response
 from django_filters import rest_framework as django_filters
 
@@ -8,6 +8,7 @@ from info.models import InfoCollection
 from record.models import Record
 from rest.filters import RecordFilter, InfoCollectionFilter
 from rest.pagination import RecordPagination
+from rest.permissions import AdminChangeRecordPermission
 from rest.serializers import (
     RecordCreateSerializer,
     RecordListSerializer,
@@ -37,7 +38,7 @@ class RecordViewSet(mixins.CreateModelMixin,
     ordering_fields = ('id', 'name', 'artist', 'realise_year')
     search_fields = ('name', 'artist', 'realise_year')
     pagination_class = RecordPagination
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (AdminChangeRecordPermission, IsAuthenticated, )
     serializer_classes = {
         'list': RecordListSerializer,
         'create': RecordCreateSerializer,
@@ -74,6 +75,7 @@ class InfoCollectionViewSet(viewsets.ModelViewSet):
     ordering = ('start_year', )
     ordering_fields = ('id', 'name', 'owner', 'start_year', )
     search_fields = ('name', 'owner', 'start_year', 'record__name', 'record_artist', 'record_realise_year')
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     serializer_classes = {
         'list': InfoCollectionListSerializer,
         'create': InfoCollectionCreateSerializer,
