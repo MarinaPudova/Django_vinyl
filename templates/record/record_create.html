@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+
+{% block title %}
+Create record
+{% endblock %}
+
+{% block content %}
+    <h2>Create new record:</h2>
+    <form method="post" action="{% url 'record-create' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" style="background:Moccasin;border-radius:10px;border:2px">Create record</button>
+    </form>
+{% endblock %}
