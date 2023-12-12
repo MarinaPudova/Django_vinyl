@@ -1,0 +1,31 @@
+from django.db import models
+
+from record.models import Record
+from rest.managers import CollectionManager, ClosedCollectionManager
+
+
+# Create your models here.
+
+
+class InfoCollection(models.Model):
+    """"""
+    name = models.CharField(max_length=100, null=False)
+    owner = models.CharField(max_length=100, null=False)
+    start_year = models.PositiveSmallIntegerField()
+    number_records = models.PositiveSmallIntegerField(null=True, default=0)
+    # collection_cost = models.FloatField()
+    is_open_viewing = models.BooleanField(default=True)
+
+    record = models.ManyToManyField(Record, related_name="records", through="CollectionRecord")
+
+    def __str__(self):
+        return self.name
+
+    objects = models.Manager()
+    open_objects = CollectionManager()
+    closed_objects = ClosedCollectionManager()
+
+
+class CollectionRecord(models.Model):
+    collection = models.ForeignKey(InfoCollection, on_delete=models.CASCADE)
+    record = models.ForeignKey(Record, on_delete=models.CASCADE)
