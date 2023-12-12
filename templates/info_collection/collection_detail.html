@@ -1,0 +1,52 @@
+{% extends 'index.html' %}
+
+{% block title %}
+More about
+{% endblock %}
+
+{% block content %}
+    {% if collection %}
+        <h2> More about collection "{{ collection.name }}"</h2>
+        <div class="btn-group">
+            <form method="get" action="{% url 'collection-update' collection.id %}">
+                <button class="update_button">Update this collection</button>
+            </form>
+
+            <form method="post" action="{% url 'collection-delete' collection.id %}">
+                {% csrf_token %}
+                <button class="delete_button">Delete this collection</button>
+            </form>
+
+            <form method="post" action="{% url 'relation-create' collection.id%}">
+                {% csrf_token %}
+                <button class="add_button">Add record to collection</button>
+            </form>
+        </div>
+        <br>
+        <br>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Owner</th>
+                <th>Year of start</th>
+                <th>Number of records</th>
+                <th>Cost of collection</th>
+            </tr>
+            <tr>
+                <td>{{ collection.name }}</td>
+                <td>{{ collection.owner }}</td>
+                <td>{{ collection.start_year }}</td>
+                <td>{{ collection.number_records }}</td>
+                <td>{{ collection.collection_cost }}</td>
+            </tr>
+        </table>
+        <br>
+        <br>
+
+        {% include "relation/relation_detail.html"%}
+
+    {% else %}
+        <h1>NOT FOUND</h1>
+    {% endif %}
+
+{% endblock %}
